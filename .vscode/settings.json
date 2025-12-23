@@ -1,0 +1,10 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "Mortgage_Risk_Analysis",
+            "database": "${workspaceFolder:mortgage-risk-analysis}/data/raw/mortgage_risk.db"
+        }
+    ]
+}
