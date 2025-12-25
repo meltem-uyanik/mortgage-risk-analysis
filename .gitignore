@@ -1,0 +1,17 @@
+# Private notes
+notes/private/
+notes/*_private.md
+notes/DEV_NOTES.md
+
+# Databases
+*.db
+
+# Raw data
+data/raw/*.csv
+
+# macOS junk
+.DS_Store
+
+# VS Code settings (optional)
+.vscode/
+
