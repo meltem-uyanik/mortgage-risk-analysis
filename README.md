@@ -62,3 +62,4 @@ The interactive dashboard allows you to:
 - Click a state on the map to filter the bar chart
 
 
+Denial rates vary substantially across states, with several states exceeding the national average, indicating meaningful geographic variation in mortgage lending outcomes.
