@@ -6,7 +6,7 @@
 
 sqlite3 -header -csv data/raw/mortgage_risk.db \
 < sql/04_denial_rate_by_state.sql \
-> data/derived/denial_rate_by_state.csv
+> data/derived/hmda_state_denial_rates_decision_only.csv
 
 
 # Then make it executable (one-time):
@@ -16,8 +16,8 @@ sqlite3 -header -csv data/raw/mortgage_risk.db \
 #./scripts/export_denial_rate_by_state.sh
 
 # Verify:
-# ls -lh data/derived/denial_rate_by_state.csv
-# head data/derived/denial_rate_by_state.csv
+# ls -lh data/derived/dhmda_state_denial_rates_decision_only.csv
+# head data/derived/hmda_state_denial_rates_decision_only.csv
 
 # standardize all exports like:
 # scripts/export_*.sh
