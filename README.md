@@ -1,12 +1,12 @@
 # Mortgage Risk Analysis (HMDA)
 
-This project analyzes U.S. mortgage application outcomes using HMDA Modified LAR data.
-The goal is to quantify mortgage denial rates and examine how they vary geographically.
+This project analyzes U.S. mortgage application outcomes using HMDA Modified Loan/Application Register (LAR) data.
+The objective is to quantify mortgage denial rates and examine how they vary geographically across U.S. states.
 
 ## Data
 - Source: HMDA 2024 Modified Loan/Application Register (LAR)
 - Unit of analysis: individual mortgage applications
-- Raw data is not included due to size; all steps are fully reproducible
+- Raw data is not included due to size; all analysis steps are fully reproducible using the provided SQL scripts
 
 ## Project Structure
 - `sql/` — schema creation, data cleaning, and analysis queries
@@ -17,17 +17,23 @@ The goal is to quantify mortgage denial rates and examine how they vary geograph
 1. Create raw schema from CSV header (`01_create_hmda_raw.sql`)
 2. Import pipe-delimited HMDA data via SQLite CLI (`02_import_hmda_raw.sql`)
 3. Build analysis-ready table (`hmda_clean`)
-4. Compute decision-only denial rates by state
+4. Compute decision-only mortgage denial rates by state
 
 ## Key Metric: Mortgage Denial Rate
 
-Denial rate is defined as: denied/(denied+originated)
+Mortgage denial rate is defined as:
 
-using HMDA `action_taken` codes:
-- 1 = originated
-- 3 = denied
+Number of denied applications /
+(Number of approved + denied applications)
 
-Other outcomes (withdrawn, incomplete, purchased) are excluded.
+
+The analysis uses HMDA `action_taken` codes to identify credit decisions:
+- `1` = Approved / originated
+- `2` = Approved but not accepted
+- `3` = Denied
+
+Applications that were withdrawn, incomplete, or purchased (codes 4–6) are excluded.
+Each application contributes equally to the analysis.
 
 ## Mortgage Denial Rates by State (HMDA 2024)
 
@@ -36,30 +42,22 @@ Only applications where a lender made a credit decision (approved or denied) are
 Records with missing state codes are excluded from state-level analysis.
 
 The analysis includes:
-- A bar chart ranking states by denial rate
-- A U.S. choropleth map showing geographic patterns
-- A national benchmark denial rate (19.3%) for context
+- A bar chart ranking states by mortgage denial rate
+- A U.S. choropleth map illustrating geographic variation
 
-All data transformations were performed in SQL and visualized in Tableau.
-
-## Next Steps
-- Denial rates by income and loan amount
-- Additional BI dashboards (Tableau / Power BI)
-- Short written interpretation of findings
-
+All data transformations were performed in SQL, and results were visualized using Tableau.
 
 ## Interactive Dashboard
 
-Explore the mortgage denial rate dashboard:
+Explore the interactive mortgage denial rate dashboard:
 
 👉 https://public.tableau.com/app/profile/meltem.uyanik/viz/MortgageDenialRatesbyStateHMDA2024/MortgageDenialRatesHMDA2024?publish=yes
 
 ![Mortgage Denial Rates Dashboard](images/denial_rate_dashboard.png)
 
-The interactive dashboard allows you to:
+The dashboard allows users to:
 - View mortgage denial rates by U.S. state
-- Compare states against the national average
-- Click a state on the map to filter the bar chart
+- Compare denial rates across states
+- Interactively filter results using the map and bar chart
 
-
-Denial rates vary substantially across states, with several states exceeding the national average, indicating meaningful geographic variation in mortgage lending outcomes.
+Denial rates vary substantially across states, indicating meaningful geographic variation in mortgage lending outcomes.
