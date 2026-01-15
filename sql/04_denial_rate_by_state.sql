@@ -22,10 +22,11 @@ SELECT
     3
   ) AS denial_rate
 FROM hmda_clean
-WHERE action_taken IN ('1','3')
+WHERE is_decision = 1
   AND state_code IS NOT NULL
 GROUP BY state_code
 ORDER BY denial_rate DESC;
+
 
 
 

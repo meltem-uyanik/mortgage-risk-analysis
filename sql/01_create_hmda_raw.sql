@@ -102,4 +102,4 @@ FROM pragma_table_info('hmda_raw');
 
 SELECT name
 FROM pragma_table_info('hmda_raw')
-LIMIT 10;
+
