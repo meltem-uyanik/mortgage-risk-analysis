@@ -1,31 +1,26 @@
-# Private notes
-notes/private/
-notes/*_private.md
-notes/DEV_NOTES.md
-
-# Databases
-*.db
-
-# Raw data
-data/raw/*.csv
-
-# macOS junk
+# ===============================
+# OS / Editor junk
+# ===============================
 .DS_Store
-
-# VS Code settings (optional)
 .vscode/
-
-# macOS
-.DS_Store
-
-# R / history
 .Rhistory
 
+# ===============================
 # Databases
+# ===============================
 *.db
 *.sqlite
 *.sqlite3
 
-# Derived data
+# ===============================
+# Data (not committed)
+# ===============================
 data/raw/*
 data/derived/*
+
+# ===============================
+# Private notes
+# ===============================
+notes/private/
+notes/*_private.md
+notes/DEV_NOTES.md
