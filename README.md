@@ -1,83 +1,82 @@
-# Mortgage Risk Analysis (HMDA)
+# Mortgage Risk Analysis (HMDA 2024)
 
-This project analyzes U.S. mortgage application outcomes using HMDA Modified Loan/Application Register (LAR) data.
-The objective is to quantify mortgage denial rates and examine how they vary geographically across U.S. states.
+This project analyzes U.S. mortgage application outcomes using the **HMDA 2024 Modified Loan/Application Register (LAR)** data.  
+The goal is to **describe mortgage denial rates** and examine how they vary across **states** and **loan amount ranges**, using transparent, reproducible SQL-based analysis and clear visualizations.
+
+The analysis is **descriptive**, focuses on reported application outcomes, and avoids causal claims.
+
+---
+
+## Project Overview
+
+Mortgage lending data are central to understanding credit access, risk patterns, and geographic variation in application outcomes.  
+In this project, I use HMDA 2024 data to:
+
+- Compute mortgage denial rates at the **state level**
+- Examine how denial rates vary across **loan amount bins**
+- Present results through **interactive Tableau dashboards**
+- Emphasize reproducibility, documentation, and careful interpretation
+
+This project was developed as part of a data analytics portfolio with a focus on **lending and mortgage analytics**.
+
+---
+
+## Key Findings (Summary)
+
+- Mortgage denial rates vary across U.S. states in the 2024 HMDA records.
+- Denial rates are generally higher for lower loan amount ranges and decrease as loan amounts increase.
+- Observed patterns reflect **reported application outcomes** and should be interpreted as descriptive summaries rather than causal relationships.
+
+---
 
 ## Data
-- Source: HMDA 2024 Modified Loan/Application Register (LAR)
-- Unit of analysis: individual mortgage applications
-- Raw data is not included due to size; all analysis steps are fully reproducible using the provided SQL scripts
 
-## Project Structure
-- `sql/` — schema creation, data cleaning, and analysis queries
-- `notes/` — worklog, modeling decisions, and open questions
-- `data/raw/` — placeholder for raw data (not committed)
+- **Source:** HMDA 2024 Modified Loan/Application Register (LAR)
+- **Unit of analysis:** Individual mortgage applications
+- **Data format:** Pipe-delimited text file (raw data not included in this repository)
 
-## Pipeline Overview
-1. Create raw schema from CSV header (`01_create_hmda_raw.sql`)
-2. Import pipe-delimited HMDA data via SQLite CLI (`02_import_hmda_raw.sql`)
-3. Build analysis-ready table (`hmda_clean`)
-4. Compute decision-only mortgage denial rates by state
+Raw HMDA data are not committed due to size and licensing considerations.  
+All results in this project are generated through SQL scripts that can be re-run locally using the original HMDA files.
 
-## Key Metric: Mortgage Denial Rate
+---
 
-Mortgage denial rate is defined as:
+## Analysis Pipeline
 
-Number of denied applications /
-(Number of approved + denied applications)
+1. Import HMDA 2024 Modified LAR data into a SQLite database.
+2. Filter records to include applications with a lender credit decision.
+3. Define mortgage denial rates as:
+   
+   > **Denial rate = denied applications / total applications**
+4. Aggregate denial rates by:
+   - U.S. state  
+   - Loan amount bins
+5. Export aggregated results for visualization.
+6. Create interactive dashboards using Tableau Public.
 
+All transformations and aggregations are implemented in SQL for transparency and reproducibility.
 
-The analysis uses HMDA `action_taken` codes to identify credit decisions:
-- `1` = Approved / originated
-- `2` = Approved but not accepted
-- `3` = Denied
+---
 
-Applications that were withdrawn, incomplete, or purchased (codes 4–6) are excluded.
-Each application contributes equally to the analysis.
+## Visualizations
 
-## Mortgage Denial Rates by State (HMDA 2024)
+Interactive dashboards are published on Tableau Public:
 
-This analysis examines mortgage denial rates across U.S. states using 2024 HMDA data.
-Only applications where a lender made a credit decision (approved or denied) are included.
-Records with missing state codes are excluded from state-level analysis.
+- **Mortgage Denial Rates by State (HMDA 2024)**  
+  https://public.tableau.com/app/profile/meltem.uyanik/viz/MortgageDenialRatesbyStateHMDA2024/MortgageDenialRatesHMDA2024
 
-The analysis includes:
-- A bar chart ranking states by mortgage denial rate
-- A U.S. choropleth map illustrating geographic variation
+- **Mortgage Denial Rates by Loan Amount (HMDA 2024)**  
+  https://public.tableau.com/app/profile/meltem.uyanik/viz/MortgageDenialRatesbyLoanAmountHMDA2024/MortgageDenialRatesbyLoanAmountHMDA2024
 
-All data transformations were performed in SQL, and results were visualized using Tableau.
+These dashboards allow users to explore geographic and loan-size-based patterns in denial rates interactively.
 
-## Interactive Dashboard
+---
 
-Explore the interactive mortgage denial rate dashboard:
+## Repository Structure
 
-👉 https://public.tableau.com/app/profile/meltem.uyanik/viz/MortgageDenialRatesbyStateHMDA2024/MortgageDenialRatesHMDA2024?publish=yes
-
-![Mortgage Denial Rates Dashboard](images/denial_rate_dashboard.png)
-
-The dashboard allows users to:
-- View mortgage denial rates by U.S. state
-- Compare denial rates across states
-- Interactively filter results using the map and bar chart
-
-Denial rates vary substantially across states, indicating meaningful geographic variation in mortgage lending outcomes.
-
-
-
-## Project 3: Mortgage Denial Rates by Age and Income
-
-This extension examines how mortgage denial rates vary by applicant age group
-after conditioning on reported income levels.
-
-Applicant age is categorized using HMDA-provided age bins and mapped to broad
-generational cohorts. Income is grouped into policy-relevant ranges to enable
-comparisons among applicants with similar reported earnings.
-
-The analysis focuses on state × age group × income combinations with sufficient
-sample size to ensure stable denial rate estimates.
-
-Key question:
-Do mortgage denial rates differ by applicant age group within comparable income
-ranges across U.S. states?
-
-This analysis is descriptive and does not attempt to establish causality.
+```text
+mortgage-risk-analysis/
+├── sql/            # SQL scripts for data preparation and aggregation
+├── notes/          # Project notes, decisions, and workflow documentation
+├── images/         # Dashboard screenshots for README preview
+├── data/            # (empty placeholders; raw and derived data are ignored)
+└── README.md
