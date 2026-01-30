@@ -1,4 +1,5 @@
 # Mortgage Risk Analysis (HMDA 2024)
+_Last updated: 2026-01-30_
 
 This project analyzes U.S. mortgage application outcomes using the **HMDA 2024 Modified Loan/Application Register (LAR)** data.  
 The goal is to **describe mortgage denial rates** and examine how they vary across **states** and **loan amount ranges**, using transparent, reproducible SQL-based analysis and clear visualizations.
