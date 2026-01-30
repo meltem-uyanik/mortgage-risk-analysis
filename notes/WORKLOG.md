@@ -28,3 +28,13 @@
 - Computed decision-only mortgage denial rates by state
 - Defined decision universe as originated (1) vs denied (3) applications
 - Excluded withdrawn, incomplete, and purchased loans to avoid bias
+
+
+## 2026-01-28
+
+- Began Project 3 extension focusing on age and income stratification
+- Reviewed HMDA applicant_age field and documented use of HMDA-provided age bins
+- Designed generation mapping consistent with HMDA reporting constraints
+- Planned income binning strategy to control for income-related confounding
+- Defined state × generation × income as primary analytic unit
+- Prepared SQL pipeline extensions for reproducible stratified analysis

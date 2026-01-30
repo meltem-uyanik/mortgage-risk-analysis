@@ -61,3 +61,23 @@ The dashboard allows users to:
 - Interactively filter results using the map and bar chart
 
 Denial rates vary substantially across states, indicating meaningful geographic variation in mortgage lending outcomes.
+
+
+
+## Project 3: Mortgage Denial Rates by Age and Income
+
+This extension examines how mortgage denial rates vary by applicant age group
+after conditioning on reported income levels.
+
+Applicant age is categorized using HMDA-provided age bins and mapped to broad
+generational cohorts. Income is grouped into policy-relevant ranges to enable
+comparisons among applicants with similar reported earnings.
+
+The analysis focuses on state × age group × income combinations with sufficient
+sample size to ensure stable denial rate estimates.
+
+Key question:
+Do mortgage denial rates differ by applicant age group within comparable income
+ranges across U.S. states?
+
+This analysis is descriptive and does not attempt to establish causality.
